@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+     "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+ <!-- 开启使用开发模式，详细错误提示  
+    <constant name="struts.devMode" value="true" /> -->      
+    <!-- 将对象交给spring管理   -->
+    <constant name="struts.objectFactory" value="spring" />      
+    <!-- 指定资源编码类型 -->    
+    <constant name="struts.i18n.encoding" value="UTF-8" />     
+    <!-- 指定每次请求到达，重新加载资源文件 -->    
+    <constant name="struts.i18n.reload" value="false" />    
+    <!-- 指定每次配置文件更改后，自动重新加载 -->    
+    <constant name="struts.configuration.xml.reload" value="false" />    
+    <!-- 默认后缀名 -->    
+    <constant name="struts.action.extension" value="htm" />   
+    <!-- 修改默认的返回路径  默认是 content 
+                        和springMVC的视图解析器一致
+    -->
+    <constant name= "struts.convention.result.path"  value= "/WEB-INF/view"/>
+    
+    <!-- 改变扫描类名 -->
+    <constant name="struts.convention.action.suffix" value="Controller"/>
+    
+    <!-- 改变注解扫描包名 
+         controller 在Controller包下扫描注解
+                    默认的扫描包名为action-->
+   
+   <constant name="struts.convention.package.locators" value="controller"/> 
+    
+</struts>

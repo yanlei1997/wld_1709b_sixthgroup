@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-4.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+     http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd" 
+     >
+     
+    
+      <!-- 激活组件扫描功能，自动扫描通过注解配置的组件 -->  
+      <context:component-scan base-package="com.jk.*.*"/>
+     
+      <!-- 加载数据资源属性文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">
+						<!-- 数据库方言 -->
+						${hibernate.dialect}
+					</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<prop key="hibernate.hbm2ddl.auto">update</prop>
+				</props>
+		</property>
+		<!-- 扫描实体类注解 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.jk.common.entity</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">  
+        <property name="driverClass">  
+            <value>${datasource.driverClassName}</value>  
+        </property>  
+        <property name="jdbcUrl">  
+            <value>${datasource.url}</value>  
+        </property>  
+        <property name="user">  
+            <value>${datasource.username}</value>  
+        </property>  
+        <property name="password">  
+            <value>${datasource.password}</value>  
+        </property>  
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->   
+        <property name="acquireIncrement">  
+            <value>${c3p0.acquireIncrement}</value>  
+        </property>  
+        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->   
+        <property name="initialPoolSize">  
+            <value>${c3p0.initialPoolSize}</value>  
+        </property>  
+        <property name="minPoolSize">  
+            <value>${c3p0.minPoolSize}</value>  
+        </property>  
+        <property name="maxPoolSize">  
+            <value>${c3p0.maxPoolSize}</value>  
+        </property>  
+        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->   
+        <property name="maxIdleTime">  
+            <value>${c3p0.maxIdleTime}</value>  
+        </property>  
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->   
+        <property name="idleConnectionTestPeriod">  
+            <value>${c3p0.idleConnectionTestPeriod}</value>  
+        </property>  
+        <!-- JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements   
+                            属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。   
+                            如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->   
+        <property name="maxStatements">  
+            <value>${c3p0.maxStatements}</value>  
+        </property>  
+        <!-- c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性能 通过  
+                                  多线程实现多个操作同时被执行。Default: 3-->   
+        <property name="numHelperThreads">  
+            <value>${c3p0.numHelperThreads}</value>  
+        </property>  
+    </bean>  
+  
+	
+	
+	     		<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+		
+	</bean>
+	
+	<!-- 定义advice,配置传播特性、事务隔离级别、只读事务、回滚策略 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="up*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+			<tx:method name="*" propagation="REQUIRED" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 定义那些类使用事务 -->
+	<aop:config>
+		<aop:advisor pointcut="execution(* com.jk.*.service.*.*(..))" advice-ref="txAdvice"/>
+	</aop:config>
+	
+      
+      
+</beans>

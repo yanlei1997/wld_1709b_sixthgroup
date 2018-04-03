@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/wld_1709b_sixthgroup.iml" filepath="$PROJECT_DIR$/wld_1709b_sixthgroup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_authority_management/wld_authority_management.iml" filepath="$PROJECT_DIR$/wld_authority_management/wld_authority_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_channel/wld_channel.iml" filepath="$PROJECT_DIR$/wld_channel/wld_channel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_client/wld_client.iml" filepath="$PROJECT_DIR$/wld_client/wld_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_common/wld_common.iml" filepath="$PROJECT_DIR$/wld_common/wld_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_order/wld_order.iml" filepath="$PROJECT_DIR$/wld_order/wld_order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_product/wld_product.iml" filepath="$PROJECT_DIR$/wld_product/wld_product.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_risk_management/wld_risk_management.iml" filepath="$PROJECT_DIR$/wld_risk_management/wld_risk_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wld_webapp/wld_webapp.iml" filepath="$PROJECT_DIR$/wld_webapp/wld_webapp.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="wld_webapp:war">
+    <output-path>$PROJECT_DIR$/wld_webapp/target</output-path>
+    <root id="archive" name="wld_webapp.war">
+      <element id="artifact" artifact-name="wld_webapp:war exploded" />
+    </root>
+  </artifact>
+</component>

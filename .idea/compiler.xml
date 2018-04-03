@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wld_authority_management" />
+        <module name="wld_channel" />
+        <module name="wld_client" />
+        <module name="wld_common" />
+        <module name="wld_order" />
+        <module name="wld_product" />
+        <module name="wld_risk_management" />
+        <module name="wld_webapp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="wld_1709b_sixthgroup" target="1.5" />
+      <module name="wld_authority_management" target="1.5" />
+      <module name="wld_channel" target="1.5" />
+      <module name="wld_client" target="1.5" />
+      <module name="wld_common" target="1.5" />
+      <module name="wld_order" target="1.5" />
+      <module name="wld_product" target="1.5" />
+      <module name="wld_risk_management" target="1.5" />
+      <module name="wld_webapp" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
